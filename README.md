@@ -107,6 +107,12 @@ OUTPUTS:
 
 
 
+
+
+
+
+
+
 7. Program for connection-oriented Iterative service in which server reverses the string send by client and sends it back.
 SERVER:
 import java.io.*;
@@ -149,3 +155,46 @@ clientSocket.close();
 }
 }
 OUTPUTS:
+
+
+
+
+
+SAI
+
+
+
+
+2. Socket programming : implementation of connection- oriented services using standard ports.
+SERVER
+import java.net.*;
+import java.io.*;
+class Asimpleserver {
+public static void main (String args[])throws Exception{
+ServerSocket s=new ServerSocket(1234);
+Socket s1=s.accept();
+OutputStream s1Out=s1.getOutputStream();
+DataOutputStream dos=new DataOutputStream(s1Out);
+dos.writeUTF("hi there");
+dos.close();
+s1Out.close();
+s1.close();
+}
+}
+
+CLIENT:
+import java.net.*;
+import java.io.*;
+ class Asimpleclient{
+public static void main (String args[])throws Exception{
+Socket s1=new Socket("LocalHost",1234);
+InputStream s1In=s1.getInputStream();
+DataInputStream dis=new DataInputStream(s1In);
+String st=new String(dis.readUTF());
+System.out.println(st);
+dis.close();
+s1In.close();
+s1.close();
+}
+}
+OUTPUT:
